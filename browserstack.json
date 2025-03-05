@@ -1,0 +1,33 @@
+{
+    "auth": {
+        "username": "debjyotidas_TWkRt3",
+        "access_key": "yNF2rxSXBjFfvotJo4dv"
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": [
+                "latest",
+                "latest-1"
+            ]
+        }
+    ],
+    "run_settings": {
+        "cypress_config_file": "C:/Users/sieva/cypress/e2e/CRM/cypress.config.js",
+        "project_name": "CRM",
+        "build_name": "CRM Test",
+        "exclude": [],
+        "parallels": "1",
+        "npm_dependencies": {},
+        "package_config_options": {},
+        "headless": true
+    },
+    "connection_settings": {
+        "local": false,
+        "local_identifier": null,
+        "local_mode": null,
+        "local_config_file": null
+    },
+    "disable_usage_reporting": false
+}
