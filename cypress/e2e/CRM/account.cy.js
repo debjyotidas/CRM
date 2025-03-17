@@ -1,11 +1,11 @@
 describe('Mailbox Composition', () => {
   beforeEach(() => {
-    cy.visit('https://crm5.matrackinc.com/crm/login.php');
+    cy.visit('https://crm.matrackinc.com/login.php');
     cy.get('#email').type('dev.trivan22@gmail.com');
-    cy.get('#password').type('12341234');
+    cy.get('#password').type('11111111');
     cy.get('button').contains('Login').click();
-    cy.wait(10000);
-    cy.url().should('equal', 'https://crm5.matrackinc.com/crm/dashboard.php');
+    cy.wait(6000);
+    cy.url().should('equal', 'https://crm.matrackinc.com/dashboard.php');
   });
 
   it('should show the user Mgmt view when the user mgmt item is clicked', () => {

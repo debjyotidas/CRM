@@ -8,33 +8,65 @@ describe('Mailbox Composition', () => {
         cy.url().should('equal', 'https://crm.matrackinc.com/dashboard.php');
     });
 
-    it('should show the lead status view when the lead status item is clicked', () => {
+    it('should add a new email conf', () => {
         // Navigate to settings
         cy.get('#settings-link').click();
         cy.get('#settings-container').should('be.visible');
         
         // Click into lead status
-        cy.get('#settings-status-nav').click();
+        cy.get('#settings-general-nav').click();
         cy.get('#settings-content').should('be.visible');
     
-        // Add new status
-        cy.get('#settings-edit-btn').click({force: true});
+        // click on new configuration
+        cy.get('#new-email-config-btn').click();
         
-        cy.get('#settings-status-name')
-            .invoke('removeAttr', 'disabled')
+        cy.get('#settings-email-address')
             .clear()
-            .type('New Status Name', { force: true });
+            .type('testAutomated@gmail.com', { force: true });
     
-        cy.get('#settings-status-order')
-            .invoke('removeAttr', 'disabled')
+        cy.get('#settings-display-name')
             .clear()
-            .type('5', { force: true });
+            .type('testAutomated`', { force: true });
     
-        cy.get('#settings-status-description')
-            .invoke('removeAttr', 'disabled')
-            .type('testing123', { force: true });
+        cy.get('#settings-incoming-host')
+            .clear()
+            .type('imap.gmail.com', { force: true });
+
+        cy.get('#settings-incoming-port')
+        .clear()
+        .type('993', { force: true });
+        
+        cy.get('#settings-protocol')
+        .select('IMAP');
     
-        cy.get('#settings-status-add').click();
+        cy.get('#settings-email-username')
+            .clear()
+            .type('testAutomated@gmail.com', { force: true });
+             
+        cy.get('#settings-password')
+        .clear()
+        .type('lzxnhvvpfvsrix12', { force: true });
+
+        
+        cy.get('#settings-folder-path')
+        .clear()
+        .type('INBOX', { force: true });
+
+        // Check the "Use SSL/TLS" checkbox if not already checked
+        cy.get('#settings-use-ssl').then($checkbox => {
+            if (!$checkbox.is(':checked')) {
+            cy.get('#settings-use-ssl').check();
+            }
+        });
+        
+        // Check the "Set as Default Email" checkbox if not already checked
+        cy.get('#settings-is-default').then($checkbox => {
+            if (!$checkbox.is(':checked')) {
+            cy.get('#settings-is-default').check();
+            }
+        });
+    
+        cy.get('#save-email-config').click();
     
         // Wait for table update
         cy.wait(2000);
@@ -143,7 +175,7 @@ describe('Mailbox Composition', () => {
 
                 if(hasDeactivate){
                     // Click Deactivate button
-                    (cy.contains('button', 'Deactivate')||cy.contains('button', 'Activate')).click();
+                    cy.contains('button', 'Deactivate').click();
                     
                     // Verify row now has Activate button
                     cy.contains('button', 'Activate').should('exist');
